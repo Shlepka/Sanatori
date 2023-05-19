@@ -1,0 +1,135 @@
+﻿<Window x:Class="Sanatorium.ViewPatients.AddAndEditPatients"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Sanatorium.ViewPatients"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
+           MinHeight="520"
+           MinWidth="400"
+         Icon="/Resources/addpatient.ico"
+        Title="Редактирование Пациента "  Height="520" Width="400">
+       <Grid Margin="10"
+          VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <Label
+                Content="Фамилия :" />
+            <TextBox
+               Text= "{Binding PatientSurname}" x:Name="txbSurname" TextChanged="txbSurname_TextChanged" />
+        </StackPanel>
+        <StackPanel
+            Grid.Row="1">
+            <Label
+                Content="Имя:" />
+            <TextBox
+                Text="{Binding PatientName}" x:Name="txbName"  />
+        </StackPanel>
+        <StackPanel
+            Grid.Row="2">
+            <Label
+                Content="Отчество:" />
+            <TextBox
+                Text="{Binding PatientPatronymic}" x:Name="txbPatronymuc" />
+        </StackPanel>
+        <StackPanel
+            Grid.Row="3">
+            <Label
+                Content="Дата приезда" />
+            <TextBox x:Name="txbArrival" 
+                Text="{Binding ArrivalDate}"  />
+        </StackPanel>
+        <StackPanel
+            Grid.Row="4">
+            <Label
+                Content="Дата уезда" />
+            <TextBox x:Name="txbDeparture"
+                Text="{Binding DepartureDate}"/>
+        </StackPanel>
+        <StackPanel
+            Grid.Row="5">
+            <TextBlock
+                Text="Визит:" />
+            <ComboBox DisplayMemberPath="Visit1" 
+                Name="cmbVisit"/>
+        </StackPanel>
+        <StackPanel
+            Grid.Row="6">
+            <Label
+                Content="Телефон:" />
+            <TextBox
+                Text="{Binding Phone}" x:Name="txbPhone"/>
+        </StackPanel>
+        <StackPanel
+            Grid.Row="7">
+            <TextBlock
+                Text="Пол:" />
+            <ComboBox DisplayMemberPath="Gender1"
+                Name="cmbGender"/>
+        </StackPanel>
+        <StackPanel
+            Grid.Row="8">
+            <Label
+                Content="Паспорт:" />
+            <TextBox
+                Text="{Binding Passport}" x:Name="txbPassport" TextChanged="txbPassport_TextChanged"/>
+        </StackPanel>
+
+
+        <Button
+            Name="btnSave"
+             Background="#673ab7" 
+            Foreground="White"        
+            Click="btnSave_Click"
+            Grid.Row="9"
+            ToolTip="8"
+            Margin="5"
+            Content="Сохранить" />
+        <Button  
+            Name="btnBack"
+             Background="#673ab7" 
+            Foreground="White"
+            Click="btnBack_Click"
+            Grid.Row="11"
+            ToolTip="8"
+            Margin="5"
+            Content="Отмена" />
+        <Button
+            
+            Name="Vist"
+            Click="Vist_Click"
+             Background="#673ab7" 
+            Foreground="White"
+            Grid.Row="10"
+            ToolTip="8"
+            Margin="5"
+            Content="Внести сроки прибывания" />
+
+    </Grid>
+</Window>

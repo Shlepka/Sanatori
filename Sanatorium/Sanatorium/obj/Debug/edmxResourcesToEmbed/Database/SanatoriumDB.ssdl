@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище SanatoriumModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Login" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Doctor">
+    <Key>
+      <PropertyRef Name="DoctorId" />
+    </Key>
+    <Property Name="DoctorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DoctorSurname" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="DoctorName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="DoctorPatronymic" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="SpecialityId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Patient">
+    <Key>
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Name="PatientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PatientSurname" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="PatientName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="PatientPatronymic" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="ArrivalDate" Type="smalldatetime" Nullable="false" />
+    <Property Name="DepartureDate" Type="smalldatetime" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Passport" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="VisitId" Type="int" Nullable="false" />
+    <Property Name="GenderId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Procedur">
+    <Key>
+      <PropertyRef Name="ProcedureId" />
+    </Key>
+    <Property Name="ProcedureId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProcedureName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProcedureDate" Type="smalldatetime" Nullable="false" />
+    <Property Name="PatientId" Type="int" Nullable="false" />
+    <Property Name="DoctorId" Type="int" Nullable="false" />
+    <Property Name="CabinetNumber" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Speciality">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Speciality" Type="nvarchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Visit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Visit" Type="nvarchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Doctor__Speciali__4316F928">
+    <End Role="Speciality" Type="Self.Speciality" Multiplicity="1" />
+    <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Speciality">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Doctor">
+        <PropertyRef Name="SpecialityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Patient__GenderI__403A8C7D">
+    <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+    <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gender">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="GenderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Patient__VisitId__3F466844">
+    <End Role="Visit" Type="Self.Visit" Multiplicity="1" />
+    <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Visit">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="VisitId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Procedur__Doctor__47DBAE45">
+    <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+    <End Role="Procedur" Type="Self.Procedur" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doctor">
+        <PropertyRef Name="DoctorId" />
+      </Principal>
+      <Dependent Role="Procedur">
+        <PropertyRef Name="DoctorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Procedur__Patien__46E78A0C">
+    <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+    <End Role="Procedur" Type="Self.Procedur" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="Procedur">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище SanatoriumModelContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Procedur" EntityType="Self.Procedur" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Speciality" EntityType="Self.Speciality" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Visit" EntityType="Self.Visit" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Doctor__Speciali__4316F928" Association="Self.FK__Doctor__Speciali__4316F928">
+      <End Role="Speciality" EntitySet="Speciality" />
+      <End Role="Doctor" EntitySet="Doctor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Patient__GenderI__403A8C7D" Association="Self.FK__Patient__GenderI__403A8C7D">
+      <End Role="Gender" EntitySet="Gender" />
+      <End Role="Patient" EntitySet="Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Patient__VisitId__3F466844" Association="Self.FK__Patient__VisitId__3F466844">
+      <End Role="Visit" EntitySet="Visit" />
+      <End Role="Patient" EntitySet="Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Procedur__Doctor__47DBAE45" Association="Self.FK__Procedur__Doctor__47DBAE45">
+      <End Role="Doctor" EntitySet="Doctor" />
+      <End Role="Procedur" EntitySet="Procedur" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Procedur__Patien__46E78A0C" Association="Self.FK__Procedur__Patien__46E78A0C">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="Procedur" EntitySet="Procedur" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

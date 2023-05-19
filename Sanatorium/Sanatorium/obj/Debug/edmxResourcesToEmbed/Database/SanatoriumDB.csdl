@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SanatoriumModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Doctor">
+    <Key>
+      <PropertyRef Name="DoctorId" />
+    </Key>
+    <Property Name="DoctorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DoctorSurname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DoctorName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DoctorPatronymic" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Phone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SpecialityId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Speciality" Relationship="Self.FK__Doctor__Speciali__4316F928" FromRole="Doctor" ToRole="Speciality" />
+    <NavigationProperty Name="Procedur" Relationship="Self.FK__Procedur__Doctor__47DBAE45" FromRole="Doctor" ToRole="Procedur" />
+  </EntityType>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Gender1" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Patient" Relationship="Self.FK__Patient__GenderI__403A8C7D" FromRole="Gender" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="Patient">
+    <Key>
+      <PropertyRef Name="PatientId" />
+    </Key>
+    <Property Name="PatientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PatientSurname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PatientName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PatientPatronymic" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ArrivalDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DepartureDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Phone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Passport" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="VisitId" Type="Int32" Nullable="false" />
+    <Property Name="GenderId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Gender" Relationship="Self.FK__Patient__GenderI__403A8C7D" FromRole="Patient" ToRole="Gender" />
+    <NavigationProperty Name="Visit" Relationship="Self.FK__Patient__VisitId__3F466844" FromRole="Patient" ToRole="Visit" />
+    <NavigationProperty Name="Procedur" Relationship="Self.FK__Procedur__Patien__46E78A0C" FromRole="Patient" ToRole="Procedur" />
+  </EntityType>
+  <EntityType Name="Procedur">
+    <Key>
+      <PropertyRef Name="ProcedureId" />
+    </Key>
+    <Property Name="ProcedureId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProcedureName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProcedureDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="PatientId" Type="Int32" Nullable="false" />
+    <Property Name="DoctorId" Type="Int32" Nullable="false" />
+    <Property Name="CabinetNumber" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Doctor" Relationship="Self.FK__Procedur__Doctor__47DBAE45" FromRole="Procedur" ToRole="Doctor" />
+    <NavigationProperty Name="Patient" Relationship="Self.FK__Procedur__Patien__46E78A0C" FromRole="Procedur" ToRole="Patient" />
+  </EntityType>
+  <EntityType Name="Speciality">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Speciality1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Doctor" Relationship="Self.FK__Doctor__Speciali__4316F928" FromRole="Speciality" ToRole="Doctor" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Visit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Visit1" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Patient" Relationship="Self.FK__Patient__VisitId__3F466844" FromRole="Visit" ToRole="Patient" />
+  </EntityType>
+  <Association Name="FK__Doctor__Speciali__4316F928">
+    <End Role="Speciality" Type="Self.Speciality" Multiplicity="1" />
+    <End Role="Doctor" Type="Self.Doctor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Speciality">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Doctor">
+        <PropertyRef Name="SpecialityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Procedur__Doctor__47DBAE45">
+    <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+    <End Role="Procedur" Type="Self.Procedur" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doctor">
+        <PropertyRef Name="DoctorId" />
+      </Principal>
+      <Dependent Role="Procedur">
+        <PropertyRef Name="DoctorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Patient__GenderI__403A8C7D">
+    <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+    <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gender">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="GenderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Patient__VisitId__3F466844">
+    <End Role="Visit" Type="Self.Visit" Multiplicity="1" />
+    <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Visit">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="VisitId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Procedur__Patien__46E78A0C">
+    <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+    <End Role="Procedur" Type="Self.Procedur" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientId" />
+      </Principal>
+      <Dependent Role="Procedur">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SanatoriumEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admin" EntityType="Self.Admin" />
+    <EntitySet Name="Doctor" EntityType="Self.Doctor" />
+    <EntitySet Name="Gender" EntityType="Self.Gender" />
+    <EntitySet Name="Patient" EntityType="Self.Patient" />
+    <EntitySet Name="Procedur" EntityType="Self.Procedur" />
+    <EntitySet Name="Speciality" EntityType="Self.Speciality" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Visit" EntityType="Self.Visit" />
+    <AssociationSet Name="FK__Doctor__Speciali__4316F928" Association="Self.FK__Doctor__Speciali__4316F928">
+      <End Role="Speciality" EntitySet="Speciality" />
+      <End Role="Doctor" EntitySet="Doctor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Procedur__Doctor__47DBAE45" Association="Self.FK__Procedur__Doctor__47DBAE45">
+      <End Role="Doctor" EntitySet="Doctor" />
+      <End Role="Procedur" EntitySet="Procedur" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Patient__GenderI__403A8C7D" Association="Self.FK__Patient__GenderI__403A8C7D">
+      <End Role="Gender" EntitySet="Gender" />
+      <End Role="Patient" EntitySet="Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Patient__VisitId__3F466844" Association="Self.FK__Patient__VisitId__3F466844">
+      <End Role="Visit" EntitySet="Visit" />
+      <End Role="Patient" EntitySet="Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Procedur__Patien__46E78A0C" Association="Self.FK__Procedur__Patien__46E78A0C">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="Procedur" EntitySet="Procedur" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
